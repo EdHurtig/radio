@@ -1,0 +1,43 @@
+```
+USAGE: radio [host] [action] [service...] [[key]:[value]...]
+```
+
+## host
+
+The host is just any valid DNS entry or IP address.  We need to know who to talk to.  If
+your API lives in a context path like `/api` you can append that to the host argument too
+
+## action
+
+Actions will determine the HTTP method to use, in addition to the standard HTTP methods
+there are also some aliases you can use
+
+- `show` translates to `GET`
+- `new` translates to `POST`
+- `update` translates to `PUT`
+
+Any action that matches an HTTP method name will be converted to uppercase, so you don't
+have to type `DELETE` on the CLI, `delete` will work just fine
+
+## endpoint
+
+The service is the API service you want to perform your action on.  You can specify the
+service either `/` delimited or space delimited.  I like space delimited becayse
+it looks nicer.  For example if I have an endpoint `GET /jobs/23/status` would
+run
+
+````bash
+$ radio api.ht.gs get jobs/23/status
+{
+  "percent": 23,
+  "status": "running"
+}
+
+# or just replace the slashes with spaces
+
+$ radio api.ht.gs get jobs 23 status
+{
+  "percent": 23,
+  "status": "running"
+}
+```
